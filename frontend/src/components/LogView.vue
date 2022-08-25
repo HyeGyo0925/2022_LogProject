@@ -2,8 +2,7 @@
   <div class="log" style="margin-top:50px;">
     <!--<h1>LOG</h1>-->
 
-
-    <div style="border:2px double gray;
+    <div style="border:2px dotted gray;
                 display:flex;
                 padding: 40px;
                 border-radius: 30px;
@@ -11,43 +10,66 @@
                 margin-right: 48px;
                 margin-bottom: 40px;">
 
-        <date-picker
-            v-model="DateRange"
-            style="margin-right: 10px; width:220px;"
-            type="date"
-            range
-            placeholder="Select date range">
-        </date-picker>
+        <div style="float:left;
+                    display:flex;
+                    text-align: center;">
 
-        <b-form-select
-            id="filter-select"
-            v-model="LogLevel"
-            style="margin-right:10px; width: 120px; "
-            size="lg"
-            @context="onContext"
-            :options="filterOptions"
-        />
+            <table style="width:auto; height:auto; word-break:break-all; padding:50px; font-family: HallymGothic-Regular;">
+                <tr>
+                    <td><b>조회 기간&nbsp;&nbsp;</b></td>
+                    <td style="text-align:left;">
+                        <date-picker
+                            v-model="DateRange"
+                            type="date"
+                            range
+                            placeholder="Select date range">
+                        </date-picker>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>로그 레벨&nbsp;&nbsp;</b></td>
+                    <td style="text-align:left;">
+                        <b-form-select
+                            id="filter-select"
+                            style="height:40px; width:100%;"
+                            v-model="LogLevel"
+                            @context="onContext"
+                            :options="filterOptions"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>로그 내용&nbsp;&nbsp;</b></td>
+                    <td style="text-align:left; ">
+                        <b-form-input
+                            id="filter-input"
+                            v-model="filter"
+                            style="height:40px;"
+                            type="search"
+                            placeholder="Search"
+                        ></b-form-input>
+                    </td>
+                </tr>
+            </table>
+            <div>
+             <b-button
+                class="font"
+                size="lg"
+                style="font-family: HallymGothic-Regular;
+                        margin-left: 20px;
+                        color : #000000;
+                        height:100%;
+                        background-color: #00000000;
+                        font-weight: bold;"
+                :disabled="!DateRange && !LogLevel && !filter"
+                @click="DateRange = '', LogLevel='', filter=''"> 초기화
+            </b-button>
+            </div>
 
-        <b-form-input
-            id="filter-input"
-            style="margin-right:10px; width: 250px; "
-            v-model="filter"
-            type="search"
-            placeholder="Search"
-        ></b-form-input>
 
-        <b-input-group-append >
-                <b-button
-                        class="font"
-                        size="lg"
-                        style="font-family: HallymGothic-Regular;
-                                color : #000000;
-                                background-color: #00000000;
-                                font-weight: bold;"
-                        :disabled="!DateRange && !LogLevel && !filter"
-                        @click="DateRange = '', LogLevel='', filter=''">Clear
-                </b-button>
-        </b-input-group-append>
+        </div>
+
+
     </div>
 
 
@@ -339,6 +361,9 @@ b-button{
      font-weight: bold;
 }
 
-
+td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 
 </style>
