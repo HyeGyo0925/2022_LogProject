@@ -13,14 +13,23 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 Vue.use(VueAxios, axios)
 
+import SmartTable from 'vuejs-smart-table'
+Vue.use(SmartTable)
+
+import DataTable from 'v-data-table'
+Vue.use(DataTable)
+
+
 import VueGoodTablePlugin from 'vue-good-table';
 import 'vue-good-table/dist/vue-good-table.css'
 Vue.use(VueGoodTablePlugin);
 
+
+
 Vue.prototype.$axios = axios
 
-Vue.config.productionTip = false
 
+Vue.config.productionTip = false
 
 
 /* eslint-disable no-new */

@@ -1,8 +1,8 @@
 <template>
-  <div class="moni">
+  <div class="set" style="margin-top:20px;">
         <h1>This is an set page</h1>
 
-        <!--<div v-for="user in users">{{user.title}}</div>-->
+       <!--<div v-for="user in users">{{user.title}}</div>-->
 
   </div>
 </template>
@@ -32,14 +32,8 @@ export default{
     },
 }
 
-
-
 </script>
-
-
-
 
 <style>
 
 </style>
-
