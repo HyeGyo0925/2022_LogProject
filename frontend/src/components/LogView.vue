@@ -2,19 +2,9 @@
   <div class="log" style="margin-top:50px;">
     <!--<h1>LOG</h1>-->
 
-    <div style="border:2px dotted gray;
-                display:flex;
-                padding: 40px;
-                border-radius: 30px;
-                margin-left: 48px;
-                margin-right: 48px;
-                margin-bottom: 40px;">
-
-        <div style="float:left;
-                    display:flex;
-                    text-align: center;">
-
-            <table style="width:auto; height:auto; word-break:break-all; padding:50px; font-family: HallymGothic-Regular;">
+    <div class="filter_div">
+        <div class="table_div">
+            <table class="filter_table">
                 <tr>
                     <td><b>조회 기간&nbsp;&nbsp;</b></td>
                     <td style="text-align:left;">
@@ -55,21 +45,16 @@
              <b-button
                 class="font"
                 size="lg"
-                style="font-family: HallymGothic-Regular;
-                        margin-left: 20px;
+                style="margin-left: 20px;
                         color : #000000;
                         height:100%;
                         background-color: #00000000;
-                        font-weight: bold;"
+                        "
                 :disabled="!DateRange && !LogLevel && !filter"
                 @click="DateRange = '', LogLevel='', filter=''"> 초기화
             </b-button>
             </div>
-
-
         </div>
-
-
     </div>
 
 
@@ -93,14 +78,7 @@
 
     <b-table
         id="my-table"
-        style="text-align:left;
-                border-top: 1px solid gainsboro;
-                margin-top:25px;
-                margin-left:48px;
-                margin-right:48px;
-                font-size: 15px;
-                font-family: HallymGothic-Regular;
-                "
+        class="table_style"
         hover large striped fixed show-empty
         :items="filteredItems"
         :fields="fields"
@@ -120,7 +98,7 @@
 
     <p style="float:left; margin-left:48px; ">
             총 로그 수 : {{filteredItems.length}}개 &nbsp;&nbsp;
-            페이지 : <b style="color:#477fd4e1;">{{currentPage}}</b> / {{Math.round(filteredRows/perPage)}}
+            페이지 : <b style="color:#477fd4e1;">{{currentPage}}</b> / {{Math.ceil(filteredRows/perPage)}}
     </p>
 
     <br/><br/>
@@ -189,7 +167,7 @@ export default {
             LogDate:'',
             LogLevel:'',
         }
-    },      // data 끝
+    }, // data 끝
     created() {
         var vm = this;
         axios.get('http://localhost:3000/api/getlog')
@@ -219,7 +197,6 @@ export default {
         },
         filterItemsByFilter:function(items){
             var word = this.filter;
-
             if(this.filter!=""){
                 return items.filter(item =>
                     item.LogString.includes(word)
@@ -227,7 +204,6 @@ export default {
             }else{
                 return items
             }
-
         },
         filterItemsByDateRange: function(items) {
             var endDate = new Date(this.DateRange[1])
@@ -260,11 +236,11 @@ export default {
             var popup1=confirm("엑셀 파일로 다운로드하시겠습니까?");
             if(popup1){
                 if(this.selected.length == 0){
-                    const wb = XLSX.utils.book_new()                    // 엑셀 파일 생성 (workbook)
-                    const ws = XLSX.utils.json_to_sheet(this.items)     // 시트 생성 (worksheet) 및 데이터 삽입
-                    XLSX.utils.book_append_sheet(wb, ws, 'sheet1')      // 엑셀 파일에 시트 추가
-                    XLSX.writeFile(wb, 'All_Excel.xlsx')                // 엑셀 다운로드
-                }else{
+                    const wb = XLSX.utils.book_new()                            // 엑셀 파일 생성 (workbook)
+                    const ws = XLSX.utils.json_to_sheet(this.filteredItems)     // 시트 생성 (worksheet) 및 데이터 삽입
+                    XLSX.utils.book_append_sheet(wb, ws, 'sheet1')              // 엑셀 파일에 시트 추가
+                    XLSX.writeFile(wb, 'Filtered_Excel.xlsx')                   // 엑셀 다운로드
+                }else if(this.selected.length != 0){
                     const wb = XLSX.utils.book_new()
                     const ws = XLSX.utils.json_to_sheet(this.selected)
                     XLSX.utils.book_append_sheet(wb, ws, 'sheet1')
@@ -359,6 +335,49 @@ b-button{
      color : #000000;
      background-color: #ffffff00;
      font-weight: bold;
+}
+
+.filter_div{
+    border:2px dotted gray;
+    display:flex;
+    padding: 40px;
+    border-radius: 30px;
+    margin-left: 48px;
+    margin-right: 48px;
+    margin-bottom: 40px;
+}
+
+.table_div{
+    float:left;
+    display:flex;
+    text-align: center;
+}
+
+.filter_table{
+    width:auto;
+    height:auto;
+    word-break:break-all;
+    padding:50px;
+    font-family: HallymGothic-Regular;
+}
+
+.reset_btn{
+    font-family: HallymGothic-Regular;
+    margin-left: 20px;
+    color : #000000;
+    height:100%;
+    background-color: #00000000;
+    font-weight: bold;
+}
+
+.table_style{
+    text-align:left;
+    border-top: 1px solid gainsboro;
+    margin-top:25px;
+    margin-left:48px;
+    margin-right:48px;
+    font-size: 15px;
+    font-family: HallymGothic-Regular;
 }
 
 td {

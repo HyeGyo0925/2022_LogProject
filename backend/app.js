@@ -1,22 +1,21 @@
-﻿var createError = require('http-errors');
+﻿// app.js - 서버 시작
+var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
+// 라우터 - 클라이언트의 요청 시 처리할 수 있는 곳으로 기능을 전달
 var indexRouter = require('./routes/index');
 var insertLogRouter = require('./routes/insertLog');
 var deleteLogRouter = require('./routes/deleteLog');
-var ReadLogRouter = require('./routes/ReadLog');
+
 
 var fs = require('fs');
 var app = express();
 const port = process.env.PORT || 3000;
 const http =require("http").createServer(app);  // node에 내장된 http 모듈, 서버 생성
-
-const io = require('socket.io')(http); // npm i -D socket.io - 서버 전용 소켓
-
-
 
 
 require('dotenv').config();
@@ -27,7 +26,8 @@ app.listen(port, ()=>{
 })
 
 const bodyParser = require("body-parser");
-const cors = require('cors');
+const cors = require('cors');       // 클라이언트, 서버 간 포트 문제를 해결
+
 
 app.use(cors())
 app.use(bodyParser.json());
@@ -46,6 +46,7 @@ mongoose.connect(
   });
 
 var db = mongoose.connection;
+
 
 
 // 전체 조회----------------------------------------------------------------------
@@ -115,7 +116,6 @@ app.use(require('connect-history-api-fallback')());
 app.use('/', indexRouter);
 app.use('/insertLog', insertLogRouter);
 app.use('/deleteLog', deleteLogRouter);
-app.use('/ReadLog', ReadLogRouter);
 
 
 // catch 404 and forward to error handler

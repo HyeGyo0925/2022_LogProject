@@ -1,3 +1,4 @@
+// main.js -  최상위 컨테이너 뷰인 App.vue 파일을 로드하는 구조
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
