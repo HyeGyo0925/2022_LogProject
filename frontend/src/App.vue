@@ -3,7 +3,7 @@
     <header>
     <nav class="c">
         <div style="float:left;" >
-        <router-link to="/ "><img src="./assets/sx_log.png" left></router-link>
+        <router-link to="/ "><img src="./assets/logo.png" left></router-link>
         </div>
       <router-link to="/home">DASHBOARD</router-link> &nbsp;
       <router-link to="/moni">MONITORING</router-link>&nbsp;
