@@ -1,4 +1,4 @@
-// main.js -  ÃÖ»óÀ§ ÄÁÅ×ÀÌ³Ê ºäÀÎ App.vue ÆÄÀÏÀ» ·ÎµåÇÏ´Â ±¸Á¶
+// main.js -  ìµœìƒìœ„ ì»¨í…Œì´ë„ˆ ë·°ì¸ App.vue íŒŒì¼ì„ ë¡œë“œí•˜ëŠ” êµ¬ì¡°ì„
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
